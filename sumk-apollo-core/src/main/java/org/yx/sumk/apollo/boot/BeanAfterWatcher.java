@@ -8,7 +8,7 @@ import java.util.function.Predicate;
 
 /**
  * @author : wjiajun
- * @description: apollo 初始化处理
+ * apollo 初始化处理
  */
 public class BeanAfterWatcher implements BootWatcher {
 

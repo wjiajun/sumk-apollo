@@ -7,7 +7,6 @@ import java.util.List;
 
 /**
  * @author : wjiajun
- * @description:
  */
 public class PropertyConfigProcessor {
 

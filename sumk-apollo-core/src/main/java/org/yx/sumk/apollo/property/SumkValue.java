@@ -8,7 +8,6 @@ import java.lang.reflect.Type;
 
 /**
  * @author : wjiajun
- * @description:
  */
 public class SumkValue {
 

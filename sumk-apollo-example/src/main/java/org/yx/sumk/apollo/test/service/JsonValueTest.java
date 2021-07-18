@@ -5,7 +5,6 @@ import org.yx.annotation.Bean;
 
 /**
  * @author : wjiajun
- * @description:
  */
 @Bean
 public class JsonValueTest {

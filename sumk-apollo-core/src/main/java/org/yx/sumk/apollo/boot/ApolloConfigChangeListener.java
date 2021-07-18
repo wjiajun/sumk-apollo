@@ -16,7 +16,6 @@ import java.util.Set;
 
 /**
  * @author : wjiajun
- * @description:
  */
 public class ApolloConfigChangeListener implements ConfigChangeListener {
 

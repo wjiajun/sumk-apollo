@@ -5,7 +5,6 @@ import org.yx.sumk.apollo.annotation.Value;
 
 /**
  * @author : wjiajun
- * @description:
  */
 @Bean
 public class ValueTest {

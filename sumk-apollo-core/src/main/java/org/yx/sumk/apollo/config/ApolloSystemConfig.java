@@ -19,7 +19,7 @@ import java.util.Set;
 
 /**
  * @author : wjiajun
- * @description: Apollo系统配置
+ * Apollo系统配置
  */
 public class ApolloSystemConfig extends AbstractRefreshableSystemConfig {
 

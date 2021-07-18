@@ -10,7 +10,6 @@ import java.security.PrivilegedAction;
 
 /**
  * @author : wjiajun
- * @description:
  */
 public abstract class ApolloConfigProcessor {
 

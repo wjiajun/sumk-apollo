@@ -12,7 +12,7 @@ import java.util.Set;
 
 /**
  * @author : wjiajun
- * @description: sumk value 相关注解处理
+ * sumk value 相关注解处理
  */
 public class SumkValueProcessor extends ApolloConfigProcessor {
 

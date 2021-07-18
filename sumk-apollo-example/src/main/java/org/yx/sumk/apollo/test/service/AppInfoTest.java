@@ -5,7 +5,6 @@ import org.yx.conf.AppInfo;
 
 /**
  * @author : wjiajun
- * @description:
  */
 @Bean
 public class AppInfoTest {

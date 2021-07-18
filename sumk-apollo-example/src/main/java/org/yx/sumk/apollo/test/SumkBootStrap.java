@@ -11,7 +11,6 @@ import org.yx.sumk.apollo.test.service.ValueTest;
 
 /**
  * @author : wjiajun
- * @description:
  */
 public class SumkBootStrap {
 

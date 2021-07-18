@@ -11,7 +11,7 @@ import java.util.Set;
 
 /**
  * @author : wjiajun
- * @description: Apollo属性配置，ApolloPropertyConfig : Namespace = 1 : 1
+ *  Apollo属性配置，ApolloPropertyConfig : Namespace = 1 : 1
  */
 public class ApolloPropertyConfig extends AbstractRefreshableSystemConfig {
 

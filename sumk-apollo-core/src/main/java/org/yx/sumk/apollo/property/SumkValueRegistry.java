@@ -11,7 +11,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * @author : wjiajun
- * @description:
  */
 public class SumkValueRegistry {
 

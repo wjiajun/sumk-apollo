@@ -15,7 +15,7 @@ import java.util.Set;
 
 /**
  * @author : wjiajun
- * @description: apollo 相关注解处理
+ * apollo 相关注解处理
  */
 public class ApolloAnnotationProcessor extends ApolloConfigProcessor {
 

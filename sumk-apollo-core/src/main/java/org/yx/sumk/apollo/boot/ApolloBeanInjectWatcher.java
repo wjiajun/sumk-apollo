@@ -10,7 +10,6 @@ import java.util.List;
 
 /**
  * @author : wjiajun
- * @description:
  */
 @Bean
 public class ApolloBeanInjectWatcher implements BeanInjectWatcher {
