@@ -28,7 +28,7 @@ public class ApolloWatcher implements BootWatcher {
 
         SystemConfigHolder.setSystemConfig(composedConfig);
         // 部分前置配置重新读取
-        SumkServer.resetStatus();
+        SumkServer.reloadConfig();
         return null;
     }
 

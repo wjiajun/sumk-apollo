@@ -6,7 +6,6 @@ import com.ctrip.framework.apollo.core.ConfigConsts;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.yx.conf.AbstractRefreshableSystemConfig;
-import org.yx.conf.AppConfig;
 import org.yx.conf.AppInfo;
 import org.yx.util.StringUtil;
 
@@ -25,16 +24,13 @@ public class ApolloSystemConfig extends AbstractRefreshableSystemConfig {
 
     private static final Logger logger = LoggerFactory.getLogger(ApolloSystemConfig.class);
 
-    private volatile AppConfig originAppConfig;
-
     private volatile List<ApolloPropertyConfig> configs = new LinkedList<>();
 
     @Override
     protected void init() {
         boolean enableApollo = AppInfo.getBoolean("apollo.bootstrap.enabled", true);
         if (!enableApollo) {
-            originAppConfig = new AppConfig("app.properties");
-            return;
+            throw new IllegalArgumentException("apollo.bootstrap.enabled parameter must be on");
         }
 
         // apollo 相关配置初始化
@@ -52,10 +48,6 @@ public class ApolloSystemConfig extends AbstractRefreshableSystemConfig {
 
     @Override
     public Map<String, String> values() {
-        if (originAppConfig != null) {
-            return originAppConfig.values();
-        }
-
         Map<String, String> configValues = new LinkedHashMap<>();
         for (ApolloPropertyConfig config : configs) {
             configValues.putAll(config.values());
@@ -66,10 +58,6 @@ public class ApolloSystemConfig extends AbstractRefreshableSystemConfig {
 
     @Override
     public String get(String s) {
-        if (originAppConfig != null) {
-            return originAppConfig.get(s);
-        }
-
         for (ApolloPropertyConfig config : configs) {
             String value = config.get(s);
             if (value != null) {
@@ -81,10 +69,6 @@ public class ApolloSystemConfig extends AbstractRefreshableSystemConfig {
 
     @Override
     public Set<String> keys() {
-        if (originAppConfig != null) {
-            return originAppConfig.keys();
-        }
-
         Set<String> names = new LinkedHashSet<>();
         for (ApolloPropertyConfig config : configs) {
             names.addAll(config.keys());
@@ -94,9 +78,6 @@ public class ApolloSystemConfig extends AbstractRefreshableSystemConfig {
 
     @Override
     public void stop() {
-        if (originAppConfig != null) {
-            originAppConfig.stop();
-            return;
-        }
+        // noting
     }
 }
