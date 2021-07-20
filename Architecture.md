@@ -16,6 +16,7 @@ https://github.com/ctripcorp/apollo
 
 ## Architecture
 ### 类图
+
 ![Architecture](./ApolloWatcher.png)
 
 ### 整合设计
@@ -43,7 +44,7 @@ https://github.com/ctripcorp/apollo
 2. 将所有标记@ApolloJsonValue和@Value的属性和方法按具体的key为粒度包装成SumkValue。
 3. 将SumkValue注册到SumkValueRegistry中，通过Multimap存储具体配置key和SumkValue的对应关系，为什么会有多个？因为配置key可以出现在代码任何地方。
 4. 通过WeakReference监听原始Bean，如果原始Bean已被回收，则相关的所有SumkValue由SumkValueRegistry.scanAndClean进行回收，调用线程来自SumkThreadPool。
-3. 当有新的配置时，通过SumkValueRegistry.Multimap查出变更配置相关的所有SumkValue，统一进行update（injectField、injectMethod）。
+5. 当有新的配置时，通过SumkValueRegistry.Multimap查出变更配置相关的所有SumkValue，统一进行update（injectField、injectMethod）。
 
-
+![sumk-apllo](./sumk-apollo.png)
 
