@@ -42,8 +42,9 @@ public class SumkValueProcessor extends ApolloConfigProcessor {
         // 调用 Method ，设置值
         boolean accessible = field.isAccessible();
         field.setAccessible(true);
+        String curValue = AppInfo.get(propertyValue);
         try {
-            field.set(bean, AppInfo.get(propertyValue));
+            field.set(bean, curValue);
         } catch (Exception e) {
             throw new IllegalStateException(
                     "reflection exception - ", e);
@@ -51,7 +52,7 @@ public class SumkValueProcessor extends ApolloConfigProcessor {
         field.setAccessible(accessible);
 
         for (String key : keys) {
-            SumkValue sumkValue = new SumkValue(key, bean, field, false);
+            SumkValue sumkValue = new SumkValue(key, bean, field, false, curValue);
             sumkValueRegistry.register(key, sumkValue);
             logger.debug("Monitoring {}", sumkValue);
         }
@@ -85,8 +86,9 @@ public class SumkValueProcessor extends ApolloConfigProcessor {
         // 调用 Method ，设置值
         boolean accessible = method.isAccessible();
         method.setAccessible(true);
+        String curValue = AppInfo.get(propertyValue);
         try {
-            method.invoke(bean, AppInfo.get(propertyValue));
+            method.invoke(bean, curValue);
         } catch (Exception e) {
             throw new IllegalStateException(
                     "reflection exception - ", e);
@@ -94,7 +96,7 @@ public class SumkValueProcessor extends ApolloConfigProcessor {
         method.setAccessible(accessible);
 
         for (String key : keys) {
-            SumkValue sumkValue = new SumkValue(key, bean, method, false);
+            SumkValue sumkValue = new SumkValue(key, bean, method, false, curValue);
             sumkValueRegistry.register(key, sumkValue);
             logger.info("Monitoring {}", sumkValue);
         }

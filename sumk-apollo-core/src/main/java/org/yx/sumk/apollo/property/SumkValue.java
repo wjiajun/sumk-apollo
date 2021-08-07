@@ -32,7 +32,9 @@ public class SumkValue {
      */
     private WeakReference<Object> beanRef;
 
-    public SumkValue(String key, Object bean, Field field, boolean isJson) {
+    private Object curValue;
+
+    public SumkValue(String key, Object bean, Field field, boolean isJson, Object curValue) {
         this.beanRef = new WeakReference<>(bean);
         this.field = field;
         this.key = key;
@@ -40,9 +42,10 @@ public class SumkValue {
         if (isJson) {
             this.genericType = field.getGenericType();
         }
+        this.curValue = curValue;
     }
 
-    public SumkValue(String key, Object bean, Method method, boolean isJson) {
+    public SumkValue(String key, Object bean, Method method, boolean isJson, Object curValue) {
         this.beanRef = new WeakReference<>(bean);
         this.method = method;
         this.key = key;
@@ -50,6 +53,7 @@ public class SumkValue {
         if (isJson) {
             this.genericType = method.getGenericParameterTypes()[0];
         }
+        this.curValue = curValue;
     }
 
     public void update(Object newVal) throws IllegalAccessException, InvocationTargetException {
@@ -94,5 +98,13 @@ public class SumkValue {
 
     boolean isTargetBeanValid() {
         return beanRef.get() != null;
+    }
+
+    public Object curValue() {
+        return this.curValue;
+    }
+
+    public void refreshCurValue(Object curValue) {
+        this.curValue = curValue;
     }
 }

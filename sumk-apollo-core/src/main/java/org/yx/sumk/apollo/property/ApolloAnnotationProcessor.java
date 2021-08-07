@@ -47,8 +47,9 @@ public class ApolloAnnotationProcessor extends ApolloConfigProcessor {
 
         boolean accessible = field.isAccessible();
         field.setAccessible(true);
+        String curValue = AppInfo.get(propertyValue);
         try {
-            field.set(bean, parseJsonValue(AppInfo.get(propertyValue), field.getGenericType()));
+            field.set(bean, parseJsonValue(curValue, field.getGenericType()));
         } catch (IllegalAccessException e) {
             throw new IllegalStateException(
                     "reflection exception - ", e);
@@ -58,7 +59,7 @@ public class ApolloAnnotationProcessor extends ApolloConfigProcessor {
         // 开启自动更新机制
         Set<String> keys = placeholderUtil.extractPlaceholderKeys(placeholder);
         for (String key : keys) {
-            SumkValue sumkValue = new SumkValue(key, bean, field, true);
+            SumkValue sumkValue = new SumkValue(key, bean, field, true, curValue);
             sumkValueRegistry.register(key, sumkValue);
             logger.debug("Monitoring {}", sumkValue);
         }
@@ -84,8 +85,9 @@ public class ApolloAnnotationProcessor extends ApolloConfigProcessor {
         // 调用 Method ，设置值
         boolean accessible = method.isAccessible();
         method.setAccessible(true);
+        String curValue = AppInfo.get(propertyValue);
         try {
-            method.invoke(bean, parseJsonValue(AppInfo.get(propertyValue), types[0]));
+            method.invoke(bean, parseJsonValue(curValue, types[0]));
         } catch (Exception e) {
             throw new IllegalStateException(
                     "reflection exception - ", e);
@@ -95,7 +97,7 @@ public class ApolloAnnotationProcessor extends ApolloConfigProcessor {
         // 开启自动更新
         Set<String> keys = placeholderUtil.extractPlaceholderKeys(placeholder);
         for (String key : keys) {
-            SumkValue sumkValue = new SumkValue(key, bean, method, true);
+            SumkValue sumkValue = new SumkValue(key, bean, method, true, curValue);
             sumkValueRegistry.register(key, sumkValue);
             logger.debug("Monitoring {}", sumkValue);
         }

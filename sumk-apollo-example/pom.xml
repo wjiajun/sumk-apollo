@@ -28,8 +28,9 @@
         </dependency>
 
         <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
+            <groupId>com.github.youtongluan</groupId>
+            <artifactId>sumk-log</artifactId>
+            <version>2.10.1</version>
         </dependency>
     </dependencies>
 

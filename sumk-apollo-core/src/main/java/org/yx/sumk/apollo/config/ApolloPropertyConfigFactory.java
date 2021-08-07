@@ -18,7 +18,7 @@ public class ApolloPropertyConfigFactory {
     private final static List<ApolloPropertyConfig> CONFIGS = new LinkedList<>();
 
     public static ApolloPropertyConfig registry(String namespace, Config config) {
-        logger.debug("set namespace:{}", namespace);
+        logger.info("set namespace:{}", namespace);
         ApolloPropertyConfig propertyConfig = new ApolloPropertyConfig(config);
         CONFIGS.add(propertyConfig);
         return propertyConfig;

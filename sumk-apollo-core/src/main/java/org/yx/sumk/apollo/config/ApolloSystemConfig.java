@@ -35,7 +35,7 @@ public class ApolloSystemConfig extends AbstractRefreshableSystemConfig {
 
         // apollo 相关配置初始化
         String namespaces = AppInfo.get("apollo.bootstrap.namespaces", ConfigConsts.NAMESPACE_APPLICATION);
-        logger.debug("use apollo namespaces: {}", namespaces);
+        logger.info("use apollo namespaces: {}", namespaces);
 
         StringUtil.splitAndTrim(StringUtil.toLatin(namespaces), ",").forEach(namespace -> {
             // registry namespace config

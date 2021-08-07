@@ -20,6 +20,15 @@ https://github.com/ctripcorp/apollo
 ![Architecture](./ApolloWatcher.png)
 
 ### 整合设计
+#### 与sumk整合后分层结构
+![Architecture](./sumk-apollo-architecture.png)
+1. 通过以上的的结构进行分层，监听器、@Value是Sumk内置通过配置中心获取配置的途径。
+2. 中间的配置中心指的是AppInfo。
+3. 如果需要引入某个配置中心依赖比如本工程，则需要增加响应的读取器（sumk-apollo），由读取器去读取配置源（apollo）。
+4. 替换了某个配置，只需要替换读取器（和可能包含更新器）就行，其它模块都不需要变更。
+5. 与spring的不同：spring会存在跨层，例如当@Value值变更，要设置新值时绕过配置中心（Spring CompositePropertySource），直接通过读取器设置到@Value对应的字段或方法上，
+   可以说是性能和通用性的取舍，但根本原因是spring内部没有提供配置中心（Spring CompositePropertySource）变更listener的机制，导致只能通过跨层调用来刷新配置，分层结构被破坏。
+
 #### Apollo-Client 注册
 1. ApolloWatcher 负责Apollo 配置注册，order为`Integer.MIN_VALUE`，保证启动顺序的情况下，其他组件也可以使用Apollo配置。
 2. 初始化ApolloSystemConfig动态变更配置，与ComposedConfig组合，实现配置优先级读取（`system属性 -> app.properties -> apollo`）。

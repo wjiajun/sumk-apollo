@@ -12,6 +12,7 @@ import org.yx.util.CollectionUtil;
 
 import java.lang.reflect.Type;
 import java.util.Collection;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -25,31 +26,42 @@ public class ApolloConfigChangeListener implements ConfigChangeListener {
 
     public ApolloConfigChangeListener() {
         this.gson = new Gson();
+        registryObserver();
     }
 
     @Override
     public void onChange(ConfigChangeEvent configChangeEvent) {
-        logger.debug("apollo remote sync change:{}", configChangeEvent);
-
-        // refresh all listener
-        ApolloWatcher.notifyUpdate();
+        logger.info("apollo remote sync change:{}", configChangeEvent);
 
         Set<String> keys = configChangeEvent.changedKeys();
         if (CollectionUtil.isEmpty(keys)) {
             return;
         }
 
-        for (String key : keys) {
-            Collection<SumkValue> sumkValues = SumkValueRegistry.get(key);
-            if (sumkValues == null || sumkValues.isEmpty()) {
-                continue;
-            }
+        // refresh all listener
+        ApolloWatcher.notifyUpdate();
+    }
 
-            // 循环，更新 value
-            for (SumkValue val : sumkValues) {
-                updateValue(val, key);
+    private void registryObserver() {
+        AppInfo.addObserver((info) -> {
+            for (String key : info.keys()) {
+                Collection<SumkValue> sumkValues = SumkValueRegistry.get(key);
+                if (sumkValues == null || sumkValues.isEmpty()) {
+                    continue;
+                }
+
+                // 是否更新
+                SumkValue sumkValue = sumkValues.stream().findFirst().get();
+                if(Objects.equals(sumkValue.curValue(), info.get(key))) {
+                    continue;
+                }
+
+                // 循环，更新 value
+                for (SumkValue val : sumkValues) {
+                    updateValue(val, key);
+                }
             }
-        }
+        });
     }
 
     private void updateValue(SumkValue val, String key) {
@@ -70,6 +82,7 @@ public class ApolloConfigChangeListener implements ConfigChangeListener {
             // 如果值数据结构是 JSON 类型，则使用 Gson 解析成对应值的类型
             str = parseJsonValue((String) str, val.getGenericType());
         }
+        val.refreshCurValue(str);
         return str;
     }
 
