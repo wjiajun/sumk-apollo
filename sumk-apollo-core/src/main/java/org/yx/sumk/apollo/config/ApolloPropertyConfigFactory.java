@@ -3,8 +3,8 @@ package org.yx.sumk.apollo.config;
 import com.ctrip.framework.apollo.Config;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.yx.util.CollectionUtil;
 
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -25,6 +25,6 @@ public class ApolloPropertyConfigFactory {
     }
 
     public static List<ApolloPropertyConfig> getApolloPropertyConfigs() {
-        return Collections.unmodifiableList(CONFIGS);
+        return CollectionUtil.unmodifyList(CONFIGS);
     }
 }
