@@ -11,12 +11,12 @@ import java.security.PrivilegedAction;
 /**
  * @author : wjiajun
  */
-public abstract class ApolloConfigProcessor {
+public abstract class ConfigProcessor {
 
     protected final SumkValueRegistry sumkValueRegistry;
     protected final PlaceholderUtil placeholderUtil;
 
-    public ApolloConfigProcessor() {
+    public ConfigProcessor() {
         sumkValueRegistry = new SumkValueRegistry();
         placeholderUtil = new PlaceholderUtil();
     }

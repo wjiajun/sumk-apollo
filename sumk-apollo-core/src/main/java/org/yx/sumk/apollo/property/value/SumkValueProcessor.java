@@ -1,9 +1,11 @@
-package org.yx.sumk.apollo.property;
+package org.yx.sumk.apollo.property.value;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.yx.conf.AppInfo;
 import org.yx.sumk.apollo.annotation.Value;
+import org.yx.sumk.apollo.property.ConfigProcessor;
+import org.yx.sumk.apollo.property.SumkValue;
 import org.yx.util.CollectionUtil;
 
 import java.lang.reflect.Field;
@@ -14,7 +16,7 @@ import java.util.Set;
  * @author : wjiajun
  * sumk value 相关注解处理
  */
-public class SumkValueProcessor extends ApolloConfigProcessor {
+public class SumkValueProcessor extends ConfigProcessor {
 
     private static final Logger logger = LoggerFactory.getLogger(SumkValueProcessor.class);
 
