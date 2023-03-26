@@ -2,6 +2,7 @@ package org.yx.sumk.apollo.config;
 
 import com.ctrip.framework.apollo.Config;
 import com.ctrip.framework.apollo.ConfigChangeListener;
+import com.google.common.collect.Maps;
 import org.yx.conf.AbstractRefreshableSystemConfig;
 
 import java.util.HashMap;
@@ -33,7 +34,7 @@ public class ApolloPropertyConfig extends AbstractRefreshableSystemConfig {
         if (propertyNames.isEmpty()) {
             return EMPTY_MAP;
         }
-        Map<String, String> map = new LinkedHashMap<>((int) ((float) propertyNames.size() / 0.75F + 1.0F));
+        Map<String, String> map = Maps.newLinkedHashMap();
         for (String propertyName : propertyNames) {
             map.put(propertyName, source.getProperty(propertyName, null));
         }
